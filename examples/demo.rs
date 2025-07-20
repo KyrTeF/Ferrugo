@@ -1,7 +1,5 @@
 use eframe::egui;
 use ferrugo::Ferrugo;
-use std::env;
-use std::env::home_dir;
 
 struct DemoApp {
     editor1: Ferrugo, // Default editor
