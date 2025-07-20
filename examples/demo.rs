@@ -1,5 +1,5 @@
 use eframe::egui;
-use crate::editor::Ferrugo;
+use ferrugo::Ferrugo;
 use std::env;
 
 struct DemoApp {
