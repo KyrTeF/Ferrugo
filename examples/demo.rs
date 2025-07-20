@@ -55,28 +55,6 @@ impl eframe::App for DemoApp {
 
             ui.separator();
 
-            // Status information
-            ui.horizontal(|ui| {
-                let editor = match self.current_editor {
-                    0 => &self.editor1,
-                    1 => &self.editor2,
-                    _ => &self.editor3,
-                };
-
-                if let Some(path) = &editor.file_path {
-                    ui.label(format!("Editing: {}", path.display()));
-                } else {
-                    ui.label("Editing: New Document");
-                }
-
-                ui.label("|");
-                ui.label(format!("Chars: {}", editor.text.chars().count()));
-                ui.label("|");
-                ui.label(format!("Lines: {}", editor.text.lines().count()));
-            });
-
-            ui.separator();
-
             // Show selected editor
             match self.current_editor {
                 0 => self.editor1.show(ui),

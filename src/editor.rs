@@ -94,6 +94,21 @@ impl Ferrugo {
             if ui.button("💾 Save As").clicked() {
                 self.save_file_as();
             }
+            // Status information
+            ui.horizontal(|ui| {
+                ui.label("|");
+                ui.label(format!("Chars: {}", self.text.chars().count())); // Display number of Characters
+                ui.label("|");
+                ui.label(format!("Lines: {}", self.text.lines().count())); // Display number of Lines
+                ui.label("|");
+
+                // Display file name and path
+                if let Some(path) = &self.file_path {
+                    ui.label(format!("Editing: {}", path.display()));
+                } else {
+                    ui.label("Editing: New Document");
+                }
+            });
         });
 
         // Text edit area with scrollbars
