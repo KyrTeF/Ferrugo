@@ -1,6 +1,7 @@
 use eframe::egui;
 use ferrugo::Ferrugo;
 use std::env;
+use std::env::home_dir;
 
 struct DemoApp {
     editor1: Ferrugo, // Default editor
@@ -11,8 +12,8 @@ struct DemoApp {
 
 impl Default for DemoApp {
     fn default() -> Self {
-        // Get first command line argument as file path
-        let file_path = env::args().nth(1);
+        // Set file path in your code
+        let file_path = "/tmp/example.txt"; // File will be created if not exists. Tip! use crate named dirs in your project for better path management in file_path.
 
         Self {
             // Default empty editor
@@ -24,12 +25,7 @@ impl Default for DemoApp {
             ),
 
             // Editor loaded from file path
-            editor3: match file_path {
-                Some(path) => Ferrugo::with_path(&path),
-                None => Ferrugo::with_text(
-                    "No file path provided\n\nRun with: cargo run --example demo -- path/to/file.txt"
-                ),
-            },
+            editor3: Ferrugo::with_path(file_path),
 
             // Start with editor1
             current_editor: 0,
@@ -69,12 +65,12 @@ fn main() -> eframe::Result<()> {
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
             .with_inner_size([900.0, 700.0])
-            .with_title("Ferrugo Editor Demo - Multiple Initialization Methods"),
+            .with_title("Ferrugo Text Editor Demo - Multiple Initialization Methods"),
         ..Default::default()
     };
 
     eframe::run_native(
-        "Ferrugo Editor Demo",
+        "Ferrugo Text Editor Demo",
         options,
         Box::new(|_cc| Ok(Box::new(DemoApp::default()))),
     )
